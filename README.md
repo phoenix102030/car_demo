@@ -2,7 +2,7 @@
 
 This is a simulation of a Prius in [gazebo 11](http://gazebosim.org) with sensor data being published using [ROS 2 foxy](http://wiki.ros.org/noetic/Installation)
 The car's throttle, brake, steering, and gear shifting are controlled by publishing a ROS message.
-A ROS node allows driving with a gamepad/joystick or keyboard.
+A ROS node allows driving with a [gamepad/joystick](./car_demo/scripts/joystick_translator.py) (not yet tested) or [keyboard](./car_demo/scripts/prius_teleop_keyboard.py) (also directly in gazebo when [mcity.world](./car_demo/worlds/mcity.world) is loaded).
 
 # Video + Pictures
 
@@ -16,10 +16,6 @@ This demo has been tested on Ubuntu Xenial (20.04) with ROS2 Foxy and inside doc
 
 1. Using ROS2 Foxy installation:
    * [Install ROS2 Foxy](https://docs.ros.org/en/foxy/Installation.html)
-   * Build
-   ```
-    cd ~/ros2_ws/src 
-   ```
 
 2. Using Docker:
    * An X server
@@ -28,18 +24,19 @@ This demo has been tested on Ubuntu Xenial (20.04) with ROS2 Foxy and inside doc
    * The current user is a member of the docker group or other group with docker execution rights.
    * [rocker](https://github.com/osrf/rocker)
 
-# Recommended
-
-* A joystick
-* A joystick driver which creates links to `/dev/input/js0` or `/dev/input/js1`
-
-This has been tested with the Logitech F710 in Xbox mode. If you have a different joystick you may need to adjust the parameters for the very basic joystick_translator node: [code](./car_demo/scripts/joystick_translator.py)
-
 # Building
 
 First clone the repo, then run the script `build_demo.bash`.
 It builds a docker image with the local source code inside.
 
+
+1. Using ROS2 Foxy installation:
+```
+$ cd ~/ros2_ws/
+$ vcs import src < rosinstall.yaml
+$ colcon build  --packages-up-to car_demo  --symlink-install 
+```
+2. Using Docker:
 ```
 $ cd car_demo
 $ ./build_demo.bash
@@ -47,22 +44,16 @@ $ ./build_demo.bash
 
 # Running
 
-Connect a game controller to your PC.
+1. Using ROS2 Foxy installation
+```
+$ source ~/ros2_ws/install/setup.bash
+$ ros2 launch car_demo demo.launch.py
+```
+2. Using Docker
 Use the script `run_demo.bash` to run the demo.
-
 ```
 $ ./run_demo.bash
 ```
-An [RVIZ](http://wiki.ros.org/rviz) window will open showing the car and sensor output.
+In both cases an [RVIZ](http://wiki.ros.org/rviz) window will open showing the car and sensor output.
 A gazebo window will appear showing the simulation.
-Either use the controller to drive the prius around the world, or click on the gazebo window and use the `WASD` keys to drive the car.
-
-If using a Logitech F710 controller:
-
-* Make sure the MODE status light is off
-* Set the swtich to XInput mode
-* The right stick controls throttle and brake
-* The left stick controls steering
-* Y puts the car into DRIVE
-* A puts the car into REVERSE
-* B puts the car into NEUTRAL
+Either use the controller to drive the prius around the world, or click on the gazebo window and use the `WASD` keys to drive the car or use the teleop window that opens in xterm.
