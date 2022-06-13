@@ -1,8 +1,8 @@
 # Demo of Prius in ROS/GAZEBO
 
-This is a simulation of a Prius in [gazebo 11](http://gazebosim.org) with sensor data being published using [ROS noetic](http://wiki.ros.org/noetic/Installation)
+This is a simulation of a Prius in [gazebo 11](http://gazebosim.org) with sensor data being published using [ROS 2 foxy](http://wiki.ros.org/noetic/Installation)
 The car's throttle, brake, steering, and gear shifting are controlled by publishing a ROS message.
-A ROS node allows driving with a gamepad or joystick or keyboard.
+A ROS node allows driving with a gamepad/joystick or keyboard.
 
 # Video + Pictures
 
@@ -12,20 +12,28 @@ A video and screenshots of the demo can be seen in this blog post: https://www.o
 
 # Requirements
 
-This demo has been tested on Ubuntu Xenial (20.04)
+This demo has been tested on Ubuntu Xenial (20.04) with ROS2 Foxy and inside docker.
 
-* An X server
-* [Docker](https://www.docker.com/get-docker)
-* [nvidia-docker2](https://github.com/nvidia/nvidia-docker/wiki/Installation-(version-2.0))
-* The current user is a member of the docker group or other group with docker execution rights.
-* [rocker](https://github.com/osrf/rocker)
+1. Using ROS2 Foxy installation:
+   * [Install ROS2 Foxy](https://docs.ros.org/en/foxy/Installation.html)
+   * Build
+   ```
+    cd ~/ros2_ws/src 
+   ```
+
+2. Using Docker:
+   * An X server
+   * [Docker](https://www.docker.com/get-docker)
+   * [nvidia-docker2](https://github.com/nvidia/nvidia-docker/wiki/Installation-(version-2.0))
+   * The current user is a member of the docker group or other group with docker execution rights.
+   * [rocker](https://github.com/osrf/rocker)
 
 # Recommended
 
 * A joystick
 * A joystick driver which creates links to `/dev/input/js0` or `/dev/input/js1`
 
-This has been tested with the Logitech F710 in Xbox mode. If you have a different joystick you may need to adjust the parameters for the very basic joystick_translator node: https://github.com/osrf/car_demo/blob/master/car_demo/nodes/joystick_translator
+This has been tested with the Logitech F710 in Xbox mode. If you have a different joystick you may need to adjust the parameters for the very basic joystick_translator node: [code](./car_demo/scripts/joystick_translator.py)
 
 # Building
 
