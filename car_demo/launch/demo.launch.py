@@ -25,6 +25,8 @@ def generate_launch_description():
         get_package_share_directory("prius_description"),
         "urdf", urdf_file_name
     )
+    with open(urdf, "r") as infp:
+        robot_desc = infp.read()
 
     rviz_path = os.path.join(
         get_package_share_directory("car_demo"),
@@ -47,8 +49,8 @@ def generate_launch_description():
             executable="robot_state_publisher",
             name="robot_state_publisher",
             namespace="prius",
-            output="log",
-            parameters=[{"use_sim_time": use_sim_time}],
+            output="screen",
+            parameters=[{"use_sim_time": use_sim_time, "robot_description": robot_desc}],
             arguments=[urdf]
         ),
 
@@ -60,7 +62,7 @@ def generate_launch_description():
                 "-d", rviz_path,
                 "--fixed-frame", LaunchConfiguration(variable_name="frame")
             ],
-            output="log",
+            output="screen",
         ),
 
         Node(

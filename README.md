@@ -8,7 +8,15 @@ A ROS node allows driving with a [gamepad/joystick](./car_demo/scripts/joystick_
 
 A video and screenshots of the demo can be seen in this blog post: https://www.osrfoundation.org/simulated-car-demo/
 
-![Prius Image](https://www.osrfoundation.org/wordpress2/wp-content/uploads/2017/06/prius_roundabout_exit.png)
+<figure>
+    <center>
+        <table><tr>
+            <td> <img src="./assets/rviz.png" title="Rviz overview" height="500"/> </td>
+            <td> <img src="./assets/gazebo.jpg" title="Gazebo overview" height="500"/> </td>
+        </tr></table>
+        <figcaption>Sensor data of Prius in rviz2 (left), and gazebo simulation (right)</figcaption>
+    </center>
+</figure>
 
 # Requirements
 
