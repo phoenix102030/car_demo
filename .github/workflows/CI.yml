@@ -49,9 +49,3 @@ jobs:
           package-name: car_demo prius_description prius_msgs
           target-ros2-distro: foxy
           skip-tests: false
-  deploy:
-    needs: test
-    name: Deploy to docker hub
-    runs-on: ubuntu-latest
-    steps:
-      - uses: ./.github/workflows/CD.yml
