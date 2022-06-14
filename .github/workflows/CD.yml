@@ -6,6 +6,8 @@ on:
       - CI
     types:
       - completed
+    branches: 
+      - ros2
 jobs:
   deploy:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
