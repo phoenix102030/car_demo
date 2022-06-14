@@ -23,18 +23,11 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v3
       - name: Build PKGs
-        run: |
-          source /opt/ros/${{ matrix.ros_distribution }}/setup.bash;
-          mkdir -p ${{github.workspace}}/ros2_ws/src ;
-          cd ${{github.workspace}}/ros2_ws/src && cp -r ${{github.workspace}}/ ${{github.workspace}}/ros2_ws/src/;
-          cd ${{github.workspace}}/ros2_ws/ && colcon build --packages-up-to car_demo;
-      - name: Cache Build Files
-        uses: actions/cache@v3
+        uses: ros-tooling/action-ros-ci@v0.2
         with:
-          path: |
-            ${{github.workspace}}/ros2_ws/build
-            ${{github.workspace}}/ros2_ws/install
-          key: build-${{ matrix.os }}-${{ matrix.ros_distribution }}
+          package-name: car_demo prius_description prius_msgs
+          target-ros2-distro: foxy
+          skip-tests: true
   test:
     needs: build
     name: Test on ros ${{ matrix.ros_distribution }} and ${{ matrix.os }}
@@ -50,18 +43,9 @@ jobs:
       - uses: ros-tooling/setup-ros@v0.3
         with:
           required-ros-distributions: ${{ matrix.ros_distribution }}
-      - name: Restore build files from cache
-        uses: actions/cache@v3
-        with:
-          ref: ros2
-          path: |
-            ${{github.workspace}}/ros2_ws/build
-            ${{github.workspace}}/ros2_ws/install
-          key: build-${{ matrix.os }}-${{ matrix.ros_distribution }}
       - name: Test
-        run: |
-          set -e
-          . /opt/ros/${{ matrix.ros_distribution }}/setup.sh
-          source /opt/ros/${{ matrix.ros_distribution }}/setup.bash;
-          ls -l ${{github.workspace}}/ros2_ws;
-          cd ${{github.workspace}}/ros2_ws/ && colcon test --packages-up-to car_demo --event-handlers console_cohesion+
+        uses: ros-tooling/action-ros-ci@v0.2
+        with:
+          package-name: car_demo prius_description prius_msgs
+          target-ros2-distro: foxy
+          skip-tests: false
