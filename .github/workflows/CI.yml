@@ -54,4 +54,4 @@ jobs:
     name: Deploy to docker hub
     runs-on: ubuntu-latest
     steps:
-      - uses: ./.github/workflows/CD
+      - uses: ./.github/workflows/CD.yml
