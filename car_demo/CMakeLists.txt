@@ -78,6 +78,18 @@ install(TARGETS PriusHybridPlugin
   RUNTIME DESTINATION bin)
 
 
+if(BUILD_TESTING)
+  find_package(ament_lint_auto REQUIRED)
+  ament_lint_auto_find_test_dependencies()
+
+  find_package(ament_cmake_gtest REQUIRED)
+  ament_add_gtest(PriusHybridPluginTest plugins/PriusHybridPlugin.cc)  # Need to link .cpp file under test
+  target_include_directories(PriusHybridPluginTest PUBLIC plugins/)  # Need to specify directories in order to #include from them in the test
+  ament_target_dependencies(PriusHybridPluginTest gazebo_dev gazebo_ros rclcpp prius_msgs)  # Gtest requires rclcpp to instantiate the Node
+
+endif()
+
+
 ament_package()
 
 install(

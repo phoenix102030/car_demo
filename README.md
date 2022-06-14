@@ -1,4 +1,6 @@
 # Demo of Prius in ROS/GAZEBO
+[![CI](https://github.com/NovoG93/car_demo/actions/workflows/CI.yml/badge.svg?branch=ros2&event=push)](https://github.com/NovoG93/car_demo/actions/workflows/CI.yml)
+
 
 This is a simulation of a Prius in [gazebo 11](http://gazebosim.org) with sensor data being published using [ROS 2 foxy](http://wiki.ros.org/noetic/Installation)
 The car's throttle, brake, steering, and gear shifting are controlled by publishing a ROS message.
