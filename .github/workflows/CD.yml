@@ -5,7 +5,7 @@ on:
   workflow_run:
       workflows: [CI]
       types: [completed]
-      branches: [ros2]
+      branches: [humble]
 
 jobs:
   deploy:
