@@ -1,0 +1,6 @@
+{
+  "package_name": "prius_msgs",
+  "non_idl_tuples": [
+    "/home/sitong/car_simu/car_demo/prius_msgs:msg/Control.msg"
+  ]
+}

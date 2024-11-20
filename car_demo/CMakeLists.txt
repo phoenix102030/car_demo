@@ -70,6 +70,7 @@ ament_python_install_package(${PROJECT_NAME})
 install(PROGRAMS
   scripts/prius_teleop_keyboard.py
   scripts/joystick_translator.py
+  scripts/odometry_publisher.py
   DESTINATION lib/${PROJECT_NAME}
 )
 install(TARGETS PriusHybridPlugin

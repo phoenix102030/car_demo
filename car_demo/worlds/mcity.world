@@ -3387,5 +3387,18 @@
         <projection_type>perspective</projection_type>
       </camera>
     </gui>
+
+    <plugin name="gazebo_ros_init" filename="libgazebo_ros_init.so">
+      <ros>
+        <namespace>/</namespace>
+      </ros>
+    </plugin>
+    
+    <plugin name="gazebo_ros_factory" filename="libgazebo_ros_factory.so">
+      <ros>
+        <namespace>/</namespace>
+      </ros>
+    </plugin>
+    
   </world>
 </sdf>

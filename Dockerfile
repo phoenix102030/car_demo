@@ -34,6 +34,7 @@ RUN mkdir -p /tmp/workspace/src
 COPY prius_description /tmp/workspace/src/prius_description
 COPY prius_msgs /tmp/workspace/src/prius_msgs
 COPY car_demo /tmp/workspace/src/car_demo
+COPY data_generator /tmp/workspace/src/data_generator
 RUN /bin/bash -c 'cd /tmp/workspace \
   && source /opt/ros/humble/setup.bash \
   && rosdep install -y --from-paths `colcon list --packages-up-to car_demo -p` --ignore-src \

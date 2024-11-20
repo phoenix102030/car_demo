@@ -35,4 +35,4 @@ fi
 
 # Run the rocker command
 rocker --nvidia --x11 --devices /dev/input/js0 /dev/input/js1 -- \
-    osrf/car_demo:$(git rev-parse --abbrev-ref HEAD)
+    osrf/car_demo:humble
