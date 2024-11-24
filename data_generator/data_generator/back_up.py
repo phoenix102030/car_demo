@@ -29,10 +29,6 @@ class DataRecorder(Node):
         self.last_log_time = None
         self.log_interval = 0.1  # 0.1 seconds
 
-        # Data counter to limit the number of data points recorded
-        self.data_counter = 0
-        self.max_data_points = 10000  # Stop after recording 10,000 data points
-
         # Subscriber for Odometry
         self.create_subscription(Odometry, '/prius/ground_truth', self.odometry_callback, 10)
 
@@ -43,11 +39,6 @@ class DataRecorder(Node):
 
     def odometry_callback(self, msg: Odometry):
         """Callback to handle Odometry messages."""
-        if self.data_counter >= self.max_data_points:
-            self.get_logger().info("Reached maximum number of data points. Stopping logging.")
-            rclpy.shutdown()
-            return
-
         with self.buffer_lock:
             # Extract timestamp from Odometry message
             current_time = msg.header.stamp.sec + msg.header.stamp.nanosec * 1e-9
@@ -93,9 +84,6 @@ class DataRecorder(Node):
 
             # Update the last log time
             self.last_log_time = current_time
-
-            # Increment the data counter
-            self.data_counter += 1
 
     def control_callback(self, msg: Control):
         """Callback to store the latest control data."""
